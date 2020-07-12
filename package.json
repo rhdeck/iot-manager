@@ -1,6 +1,6 @@
 {
   "name": "@raydeck/iot-manager",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Manager for initializing IOT connections",
   "main": "index.js",
   "scripts": {
