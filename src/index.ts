@@ -1,5 +1,5 @@
-const { Iot, STS, IotData } = require("aws-sdk");
-const { v4: uuid } = require("uuid");
+import { Iot, STS, IotData } from "aws-sdk";
+import { v4 as uuid } from "uuid";
 //#region IOT
 let iot;
 let sts;
@@ -29,26 +29,26 @@ const getIOT = async ({ RoleArn, region, topic, id }) => {
     topic,
   };
 };
-var endPoint = null;
-const getIOTEndpoint = async () => {
-  if (endPoint === null) {
+var endPoint: string | undefined;
+const getIOTEndpoint = async (): Promise<string> => {
+  if (!endPoint) {
     const iot = new Iot();
     const { endpointAddress } = await iot.describeEndpoint().promise();
     endPoint = endpointAddress;
   }
-  return endPoint;
+  return endPoint!;
 };
-var iotdata = null;
-const getIOTData = async () => {
-  if (iotdata === null) {
+var iotdata: IotData | undefined;
+const getIOTData = async (): Promise<IotData> => {
+  if (!iotdata) {
     const ep = await getIOTEndpoint();
     iotdata = new IotData({ endpoint: ep });
   }
-  return iotdata;
+  return iotdata!;
 };
 const sendIOTMessage = async (topic, message) => {
   const i = await getIOTData();
   return i.publish({ topic, payload: message, qos: 0 }).promise();
 };
 
-module.exports = { sendIOTMessage, getIOT };
+export { sendIOTMessage, getIOT };

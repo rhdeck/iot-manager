@@ -4,7 +4,9 @@
   "description": "Manager for initializing IOT connections",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "postinstall": "install-peers"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +17,9 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "@types/node": "^14.0.22",
+    "eslint": "^6.8.0",
+    "install-peers-cli": "^2.2.0",
+    "typescript": "^3.9.6"
   }
 }
